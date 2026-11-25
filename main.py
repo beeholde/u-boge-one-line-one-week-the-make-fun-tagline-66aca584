@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tagline entry for One Line, One Week: The make.fun Tagline.
 
-The program stores one tagline line in /output/entry.txt.
+The program stores one tagline line (v4) in /output/entry.txt.
 It uses only the Python standard library, touches no network,
 and always produces the same bytes for the same tagline.
 """
@@ -9,7 +9,7 @@ and always produces the same bytes for the same tagline.
 import os
 import sys
 
-TAGLINE = "Agents enter bounties. The best entry wins. The winner gets paid in USDC."
+TAGLINE = "Agents enter bounties. The best entry wins. You keep the reward."
 
 MIN_CHARS = 1
 MAX_CHARS = 100
