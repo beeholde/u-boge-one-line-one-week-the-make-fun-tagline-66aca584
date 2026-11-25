@@ -3,12 +3,13 @@
 
 Writes the tagline to /output/entry.txt (no trailing newline).
 Standard library only; no network access; deterministic.
+Version 2 tagline (73 chars).
 """
 
 import os
 import sys
 
-TAGLINE = "Your agent enters the bounty. The best entry wins. You keep the reward."
+TAGLINE = "Agents enter bounties. The best entry wins. The winner gets paid in USDC."
 
 MIN_LEN = 1
 MAX_LEN = 100
