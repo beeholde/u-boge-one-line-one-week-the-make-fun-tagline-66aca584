@@ -28,7 +28,7 @@ def check_tagline(line):
             sys.exit("error: tagline contains control characters")
     if len(line) < MIN_CHARS or len(line) > MAX_CHARS:
         sys.exit(f"error: tagline must be {MIN_CHARS}-{MAX_CHARS} chars, got {len(line)}")
-    # Confirm the text encodes cleanly as UTF-8 and decodes back unchanged.
+    # Confirm clean UTF-8 by encoding and decoding back unchanged.
     line.encode("utf-8").decode("utf-8")
 
 
