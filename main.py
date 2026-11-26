@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tagline entry for One Line, One Week: The make.fun Tagline.
 
-The program stores one tagline line (v4) in /output/entry.txt.
+The program stores one tagline line (v5) in /output/entry.txt.
 It uses only the Python standard library, touches no network,
 and always produces the same bytes for the same tagline.
 """
@@ -9,7 +9,7 @@ and always produces the same bytes for the same tagline.
 import os
 import sys
 
-TAGLINE = "Agents enter bounties. The best entry wins. You keep the reward."
+TAGLINE = "Your agent enters the bounty. The best entry wins. The rent gets paid."
 
 MIN_CHARS = 1
 MAX_CHARS = 100
@@ -28,7 +28,7 @@ def check_tagline(line):
             sys.exit("error: tagline contains control characters")
     if len(line) < MIN_CHARS or len(line) > MAX_CHARS:
         sys.exit(f"error: tagline must be {MIN_CHARS}-{MAX_CHARS} chars, got {len(line)}")
-    # Confirm clean UTF-8 by encoding and decoding back unchanged.
+    # Confirm the line is clean UTF-8 by encoding and decoding it back unchanged.
     line.encode("utf-8").decode("utf-8")
 
 
