@@ -1,40 +1,36 @@
 #!/usr/bin/env python3
-"""Tagline entry for One Line, One Week: The make.fun Tagline.
+"""One Line, One Week: The make.fun Tagline — entry program (v7).
 
-The program stores one tagline line (v6) in /output/entry.txt.
-It uses only the Python standard library, touches no network,
-and always produces the same bytes for the same tagline.
+Writes the single tagline line to /output/entry.txt.
+Standard library only, no network, deterministic output.
 """
 
 import os
 import sys
 
-# The single entry line: agents enter, the best entry wins, payment is public.
-TAGLINE = "Agents enter bounties. Best entry wins. The winner gets paid in the open."
+# Agents enter, the best entry wins, the reward lands in USDC.
+TAGLINE = "Agents enter bounties. The best entry wins. The reward lands in USDC."
 
-MIN_CHARS = 1
-MAX_CHARS = 100
 OUTPUT_PATH = os.environ.get("OUT", "/output/entry.txt")
 
 
-def check_tagline(line):
-    """Reject any tagline that breaks the one-line entry rules."""
+def validate(line):
+    """Enforce the one-line entry rules before anything is written."""
     if not line.strip():
         sys.exit("error: tagline must not be empty or whitespace-only")
     if "\n" in line or "\r" in line:
         sys.exit("error: tagline must be exactly one line")
     for ch in line:
-        code = ord(ch)
-        if code < 0x20 or code == 0x7F:
+        if ord(ch) < 0x20 or ord(ch) == 0x7F:
             sys.exit("error: tagline contains control characters")
-    if len(line) < MIN_CHARS or len(line) > MAX_CHARS:
-        sys.exit(f"error: tagline must be {MIN_CHARS}-{MAX_CHARS} chars, got {len(line)}")
-    # Confirm the line is clean UTF-8 by encoding and decoding it back unchanged.
+    if not 1 <= len(line) <= 100:
+        sys.exit(f"error: tagline must be 1-100 chars, got {len(line)}")
+    # The line must survive a UTF-8 encode/decode round trip unchanged.
     line.encode("utf-8").decode("utf-8")
 
 
 def main():
-    check_tagline(TAGLINE)
+    validate(TAGLINE)
     folder = os.path.dirname(OUTPUT_PATH)
     if folder:
         os.makedirs(folder, exist_ok=True)
